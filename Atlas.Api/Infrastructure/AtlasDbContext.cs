@@ -1,16 +1,16 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Atlas.Api.Domain;
+using Microsoft.EntityFrameworkCore;
 
 namespace Atlas.Api.Infrastructure;
 
-public class AtlasDbContext : DbContext
+public class AtlasDbContext(DbContextOptions<AtlasDbContext> options) : DbContext(options), IUnitOfWork
 {
-    public AtlasDbContext(DbContextOptions<AtlasDbContext> options) : base(options)
-    {
-    }
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(AtlasDbContext).Assembly);
     }
+
+    public DbSet<User> Users { get; set; }
+    public DbSet<PointOfInterest> PointsOfInterest { get; set; }
 }
 

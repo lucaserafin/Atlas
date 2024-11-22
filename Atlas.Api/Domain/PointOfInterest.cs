@@ -11,7 +11,7 @@ public class PointOfInterest : Entity
         Name = name;
         Description = description;
         Location = location;
-        CreatedAt = DateTime.Now;
+        CreatedAt = DateTime.Now.ToUniversalTime();
     }
 
     public string Name { get; }

@@ -18,7 +18,7 @@ public class User : Entity
     public Point Location { get; private set; }
     public void AssociateLocationData(Point locationData)
     {
-        UpdatedAt = DateTime.Now;
+        UpdatedAt = DateTime.Now.ToUniversalTime();
         Location = locationData;
     }
 }

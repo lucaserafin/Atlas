@@ -29,8 +29,8 @@ namespace Atlas.UnitTests.Domain
             poi.Description.Should().Be(description);
             poi.Id.Should().Be(0);
             poi.Location.Should().Be(location);
-            poi.CreatedAt.Should().BeBefore(DateTime.Now);
-            poi.CreatedAt.Should().BeAfter(DateTime.Now.AddMinutes(-1));
+            poi.CreatedAt.Should().BeBefore(DateTime.Now.ToUniversalTime());
+            poi.CreatedAt.Should().BeAfter(DateTime.Now.AddMinutes(-1).ToUniversalTime());
         }
     }
 }

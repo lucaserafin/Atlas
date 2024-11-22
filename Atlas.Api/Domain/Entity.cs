@@ -2,16 +2,30 @@
 
 public abstract class Entity
 {
-    int _Id;
+    int _id;
     public virtual int Id
     {
         get
         {
-            return _Id;
+            return _id;
         }
         protected set
         {
-            _Id = value;
+            _id = value;
+        }
+    }
+
+    Guid _guid;
+
+    public virtual Guid Guid
+    {
+        get
+        {
+            return _guid;
+        }
+        protected set
+        {
+            _guid = value;
         }
     }
 }

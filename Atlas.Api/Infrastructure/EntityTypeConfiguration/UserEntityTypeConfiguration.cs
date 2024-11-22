@@ -6,8 +6,6 @@ namespace Atlas.Api.Infrastructure.EntityTypeConfiguration;
 
 public class UserEntityTypeConfiguration : IEntityTypeConfiguration<User>
 {
-
-
     public void Configure(EntityTypeBuilder<User> builder)
     {
         builder.ToTable(nameof(User));
@@ -15,7 +13,9 @@ public class UserEntityTypeConfiguration : IEntityTypeConfiguration<User>
         builder.Property(x => x.Id)
             .ValueGeneratedOnAdd();
         builder.HasKey(x => x.Id);
-        
+
+        builder.Property(x => x.Guid).ValueGeneratedOnAdd();
+        builder.HasIndex(x => x.Guid).IsUnique();
         builder.Property(x => x.Username).IsRequired();
         builder.Property(x => x.Location).HasColumnType("geography (point)").IsRequired();
         builder.HasIndex(x => x.Location).HasMethod("GIST");
