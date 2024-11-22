@@ -8,7 +8,7 @@ public class PointOfInterestEntityTypeConfiguration : IEntityTypeConfiguration<P
 {
     public void Configure(EntityTypeBuilder<PointOfInterest> builder)
     {
-        builder.ToTable(nameof(User));
+        builder.ToTable(nameof(PointOfInterest));
 
         builder.Property(x => x.Id)
             .ValueGeneratedOnAdd();
@@ -16,7 +16,7 @@ public class PointOfInterestEntityTypeConfiguration : IEntityTypeConfiguration<P
 
         builder.Property(x => x.Name).IsRequired();
         builder.Property(x => x.Description).IsRequired();
-        builder.Property(x => x.Location).IsRequired();
+        builder.Property(x => x.Location).HasColumnType("geography (point)").IsRequired();
         builder.HasIndex(x => x.Location).HasMethod("GIST");
         builder.Property(x => x.CreatedAt).IsRequired();
     }

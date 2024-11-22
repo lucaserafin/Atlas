@@ -17,7 +17,7 @@ public class UserEntityTypeConfiguration : IEntityTypeConfiguration<User>
         builder.HasKey(x => x.Id);
         
         builder.Property(x => x.Username).IsRequired();
-        builder.Property(x => x.Location).IsRequired();
+        builder.Property(x => x.Location).HasColumnType("geography (point)").IsRequired();
         builder.HasIndex(x => x.Location).HasMethod("GIST");
 
         builder.Property(x => x.UpdatedAt).IsRequired();

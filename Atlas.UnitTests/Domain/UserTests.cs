@@ -15,7 +15,7 @@ public class UserTests
         var point = new Point(1, 1);
 
         // Act
-        var user = new PointOfInterest(username, point);
+        var user = new User(username, point);
 
         // Assert
         user.Should().NotBeNull();
@@ -34,7 +34,7 @@ public class UserTests
         var point = new Point(1, 1);
 
         // Act
-        var act = () => new PointOfInterest(username, point);
+        var act = () => new User(username, point);
 
         // Assert
         act.Should().Throw<ArgumentException>();
@@ -46,7 +46,7 @@ public class UserTests
         // Arrange
         var username = "test";
         var point = new Point(1, 1);
-        var user = new PointOfInterest(username, point);
+        var user = new User(username, point);
 
         // Act
         var updatedAt = user.UpdatedAt;
