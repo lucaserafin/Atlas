@@ -5,7 +5,7 @@ using Atlas.Api.Infrastructure;
 using FluentResults;
 using MediatR;
 
-namespace Atlas.Api.Application.Commands;
+namespace Atlas.Api.Application.Commands.Poi;
 
 public record UpdatePointOfInterestRequest(Guid Guid, PointOfInterestDto PointOfInterestDto) : IRequest<Result<PointOfInterestDto>>;
 

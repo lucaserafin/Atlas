@@ -5,11 +5,11 @@ using Atlas.Api.Infrastructure;
 using FluentResults;
 using MediatR;
 
-namespace Atlas.Api.Application.Commands;
+namespace Atlas.Api.Application.Commands.User;
 
 public record DeleteUserRequest(Guid Guid) : IRequest<Result>;
 
-public class DeleteUserRequestHandler(IUserRepository userRepository, 
+public class DeleteUserRequestHandler(IUserRepository userRepository,
     ILogger<DeleteUserRequestHandler> logger) : IRequestHandler<DeleteUserRequest, Result>
 {
     private readonly IUserRepository _userRepository = userRepository;

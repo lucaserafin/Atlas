@@ -5,11 +5,11 @@ using Atlas.Api.Infrastructure;
 using FluentResults;
 using MediatR;
 
-namespace Atlas.Api.Application.Commands;
+namespace Atlas.Api.Application.Commands.Poi;
 
 public record DeletePointOfInterestRequest(Guid Guid) : IRequest<Result>;
 
-public class DeletePointOfInterestRequestHandler(IPointOfInterestRepository PointOfInterestRepository, 
+public class DeletePointOfInterestRequestHandler(IPointOfInterestRepository PointOfInterestRepository,
     ILogger<DeletePointOfInterestRequestHandler> logger) : IRequestHandler<DeletePointOfInterestRequest, Result>
 {
     private readonly IPointOfInterestRepository _PointOfInterestRepository = PointOfInterestRepository;

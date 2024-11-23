@@ -1,4 +1,4 @@
-using Atlas.Api.Application.Commands;
+using Atlas.Api.Application.Commands.Poi;
 using Atlas.Api.Application.Dto;
 using Atlas.Api.Domain;
 using Atlas.Api.Infrastructure;

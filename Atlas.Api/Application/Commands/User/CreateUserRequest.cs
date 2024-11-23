@@ -5,11 +5,11 @@ using Atlas.Api.Infrastructure;
 using FluentResults;
 using MediatR;
 
-namespace Atlas.Api.Application.Commands;
+namespace Atlas.Api.Application.Commands.User;
 
 public record CreateUserRequest(string Username, CoordinateDto Coordinate) : IRequest<Result<UserDto>>;
 
-public class CreateUserRequestHandler(IUserRepository userRepository, 
+public class CreateUserRequestHandler(IUserRepository userRepository,
     ILogger<CreateUserRequestHandler> logger) : IRequestHandler<CreateUserRequest, Result<UserDto>>
 {
     private readonly IUserRepository _userRepository = userRepository;
@@ -18,7 +18,7 @@ public class CreateUserRequestHandler(IUserRepository userRepository,
     public async Task<Result<UserDto>> Handle(CreateUserRequest request, CancellationToken cancellationToken)
     {
         _logger.LogInformation("Creating user");
-        
+
         var user = UserFactory.CreateUser(request.Username, request.Coordinate.Latitude, request.Coordinate.Longitude);
         bool userAlreadyExist = await _userRepository.UsernameExistAsync(user.Username);
         if (userAlreadyExist)

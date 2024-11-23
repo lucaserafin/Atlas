@@ -5,11 +5,11 @@ using Atlas.Api.Infrastructure;
 using FluentResults;
 using MediatR;
 
-namespace Atlas.Api.Application.Commands;
+namespace Atlas.Api.Application.Commands.Poi;
 
 public record CreatePointOfInterestRequest(string name, string description, CoordinateDto Coordinate) : IRequest<Result<PointOfInterestDto>>;
 
-public class CreatePointOfInterestRequestHandler(IPointOfInterestRepository PointOfInterestRepository, 
+public class CreatePointOfInterestRequestHandler(IPointOfInterestRepository PointOfInterestRepository,
     ILogger<CreatePointOfInterestRequestHandler> logger) : IRequestHandler<CreatePointOfInterestRequest, Result<PointOfInterestDto>>
 {
     private readonly IPointOfInterestRepository _PointOfInterestRepository = PointOfInterestRepository;
@@ -18,7 +18,7 @@ public class CreatePointOfInterestRequestHandler(IPointOfInterestRepository Poin
     public async Task<Result<PointOfInterestDto>> Handle(CreatePointOfInterestRequest request, CancellationToken cancellationToken)
     {
         _logger.LogInformation("Creating PointOfInterest");
-        
+
         var PointOfInterest = PointOfInterestFactory.CreatePointOfInterest(request.name, request.description, request.Coordinate.Latitude, request.Coordinate.Longitude);
         bool PointOfInterestAlreadyExist = await _PointOfInterestRepository.PointOfInterestNameExistAsync(PointOfInterest.Name);
         if (PointOfInterestAlreadyExist)

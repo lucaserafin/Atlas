@@ -5,7 +5,7 @@ using Atlas.Api.Infrastructure;
 using FluentResults;
 using MediatR;
 
-namespace Atlas.Api.Application.Commands;
+namespace Atlas.Api.Application.Commands.User;
 
 public record UpdateUserRequest(Guid Guid, UserDto userDto) : IRequest<Result<UserDto>>;
 

@@ -1,4 +1,3 @@
-using Atlas.Api.Application.Commands;
 using Atlas.Api.Domain;
 using FluentResults;
 using Microsoft.Extensions.Logging;
@@ -9,6 +8,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Atlas.Api.Infrastructure;
+using Atlas.Api.Application.Commands.Poi;
 
 namespace Atlas.UnitTests.Application;
 

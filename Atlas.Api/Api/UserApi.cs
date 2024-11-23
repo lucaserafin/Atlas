@@ -1,4 +1,5 @@
 ﻿using Atlas.Api.Application.Commands;
+using Atlas.Api.Application.Commands.User;
 using Atlas.Api.Application.Dto;
 using Atlas.Api.Application.Queries;
 using Atlas.Api.Domain;
@@ -18,6 +19,7 @@ public static class UserApi
         builder.MapPut("/api/users/{id}", UpdateUser);
         builder.MapDelete("/api/users/{id}", DeleteUser);
 
+        builder.MapPut("/api/users/{id}/location", UpdateUserLocation);
         return builder;
     }
 
@@ -81,6 +83,10 @@ public static class UserApi
             { IsSuccess: false } => Results.NotFound(result.Errors),
             _ => Results.BadRequest()
         };
+    }
+    public static async Task UpdateUserLocation(Guid id, CoordinateDto coordinate, IMediator mediator)
+    {
+        var result = await mediator.Send(new UpdateUserLocationRequest(id, coordinate));
     }
 
 }

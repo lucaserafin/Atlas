@@ -5,10 +5,10 @@ namespace Atlas.Api.Infrastructure;
 public interface IPointOfInterestRepository
 {
     IUnitOfWork UnitOfWork { get; }
-    Task AddAsync(PointOfInterest PointOfInterest);
+    Task AddAsync(PointOfInterest poi);
     Task<PointOfInterest?> GetAsync(Guid guid);
     Task<IEnumerable<PointOfInterest>> GetAllAsync();
-    void Update(PointOfInterest PointOfInterest);
-    void Remove(PointOfInterest PointOfInterest);
-    Task<bool> PointOfInterestNameExistAsync(string PointOfInterestname);
+    void Update(PointOfInterest poi);
+    void Remove(PointOfInterest poi);
+    Task<bool> PointOfInterestNameExistAsync(string poi);
 }

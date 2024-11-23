@@ -19,19 +19,20 @@ public class PointOfInterest : Entity
     public DateTime CreatedAt { get; private set; }
     public DateTime? UpdatedAt { get; private set; }
 
-    internal void AssociateLocationData(Point locationData)
+
+    public void AssociateLocationData(Point locationData)
     {
         UpdatedAt = DateTime.Now.ToUniversalTime();
         Location = locationData;
     }
 
-    internal void UpdateDescription(string description)
+    public void UpdateDescription(string description)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(description);
         Description = description;
     }
 
-    internal void UpdateName(string name)
+    public void UpdateName(string name)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(name);
         Name = name;

@@ -32,6 +32,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.MapUserApi();
+app.MapPointOfInterestApi();
 
 await app.RunAsync();
 
+public partial class Program { }
