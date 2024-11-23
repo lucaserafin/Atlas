@@ -20,5 +20,6 @@ public class PointOfInterestEntityTypeConfiguration : IEntityTypeConfiguration<P
         builder.Property(x => x.Location).HasColumnType("geography (point)").IsRequired();
         builder.HasIndex(x => x.Location).HasMethod("GIST");
         builder.Property(x => x.CreatedAt).IsRequired();
+        builder.Property(x => x.UpdatedAt);
     }
 }

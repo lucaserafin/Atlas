@@ -13,7 +13,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Atlas.Api.Infrastructure.Migrations
 {
     [DbContext(typeof(AtlasDbContext))]
-    [Migration("20241123114930_Initial")]
+    [Migration("20241123162503_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -52,6 +52,9 @@ namespace Atlas.Api.Infrastructure.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
 

@@ -26,6 +26,7 @@ namespace Atlas.Api.Infrastructure.Migrations
                     Description = table.Column<string>(type: "text", nullable: false),
                     Location = table.Column<Point>(type: "geography (point)", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     Guid = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>

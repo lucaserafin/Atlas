@@ -1,11 +1,8 @@
-﻿using Atlas.Api.Application.Commands;
-using Atlas.Api.Application.Commands.User;
+﻿using Atlas.Api.Application.Commands.User;
 using Atlas.Api.Application.Dto;
 using Atlas.Api.Application.Queries;
-using Atlas.Api.Domain;
-using Atlas.Api.Infrastructure;
 using MediatR;
-using NetTopologySuite.Geometries;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Atlas.Api.Api;
 
@@ -20,16 +17,18 @@ public static class UserApi
         builder.MapDelete("/api/users/{id}", DeleteUser);
 
         builder.MapPut("/api/users/{id}/location", UpdateUserLocation);
+
+        builder.MapGet("/api/users/{id}/PointOfInterest", GetNearPointOfInterest);
         return builder;
     }
 
 
     public static async Task<IResult> CreateUser(CreateUserRequest request, IMediator mediator)
-     {
+    {
         var result = await mediator.Send(request);
         return result switch
         {
-            { IsSuccess: true} => Results.Created($"/api/users/{result.Value.Guid}", result.Value),
+            { IsSuccess: true } => Results.Created($"/api/users/{result.Value.Guid}", result.Value),
             { IsSuccess: false } => Results.BadRequest(result.Errors),
             _ => Results.BadRequest()
         };
@@ -56,14 +55,14 @@ public static class UserApi
             _ => Results.BadRequest()
         };
     }
-    public static async Task<IResult> UpdateUser(Guid id, UserDto user,IMediator mediator)
+    public static async Task<IResult> UpdateUser(Guid id, UserDto user, IMediator mediator)
     {
-        var result = await mediator.Send(new UpdateUserRequest(id,user));
+        var result = await mediator.Send(new UpdateUserRequest(id, user));
         if (result.IsSuccess)
         {
             return Results.NoContent();
         }
-        if(result.HasError(e => e.Message.Equals("User not found")))
+        if (result.HasError(e => e.Message.Equals("User not found")))
         {
             return Results.NotFound(result.Errors);
         }
@@ -84,9 +83,30 @@ public static class UserApi
             _ => Results.BadRequest()
         };
     }
-    public static async Task UpdateUserLocation(Guid id, CoordinateDto coordinate, IMediator mediator)
+
+    public static async Task<IResult> UpdateUserLocation(Guid id, CoordinateDto coordinate, IMediator mediator)
     {
         var result = await mediator.Send(new UpdateUserLocationRequest(id, coordinate));
+        return result switch
+        {
+            { IsSuccess: true } => Results.NoContent(),
+            { IsSuccess: false } => Results.NotFound(result.Errors),
+            _ => Results.BadRequest()
+        };
+    }
+
+    private static async Task<IResult> GetNearPointOfInterest(Guid id, [FromQuery] double distance, IMediator mediator)
+    {
+        //Distance in km from API
+        //To meters
+        distance *= 1000;
+        var result = await mediator.Send(new GetNearPointOfInterestRequest(id, distance));
+        return result switch
+        {
+            { IsSuccess: true } => Results.Ok(result.Value),
+            { IsSuccess: false } => Results.NotFound(result.Errors),
+            _ => Results.BadRequest()
+        };
     }
 
 }

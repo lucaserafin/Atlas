@@ -16,6 +16,7 @@ builder.Services.AddDbContext<AtlasDbContext>(options =>
         o => o.UseNetTopologySuite());
 });
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IPointOfInterestRepository, PointOfInterestRepository>();
 builder.Services.AddScoped<IUnitOfWork,AtlasDbContext>();
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<Program>());
 

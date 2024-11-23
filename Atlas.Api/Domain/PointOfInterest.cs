@@ -30,11 +30,13 @@ public class PointOfInterest : Entity
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(description);
         Description = description;
+        UpdatedAt = DateTime.Now.ToUniversalTime();
     }
 
     public void UpdateName(string name)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(name);
         Name = name;
+        UpdatedAt = DateTime.Now.ToUniversalTime();
     }
 }

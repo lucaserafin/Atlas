@@ -1,5 +1,6 @@
 ﻿using Atlas.Api.Domain;
 using Microsoft.EntityFrameworkCore;
+using NetTopologySuite.Geometries;
 
 namespace Atlas.Api.Infrastructure;
 
@@ -37,5 +38,13 @@ public class PointOfInterestRepository(AtlasDbContext dbContext) : IPointOfInter
     public async Task<bool> PointOfInterestNameExistAsync(string name)
     {
         return await _dbContext.PointsOfInterest.AnyAsync(x => x.Name == name);
+    }
+
+    public async Task<IEnumerable<PointOfInterest>> GetNearPointOfInterestAsync(Point location, double distance)
+    {
+       return await _dbContext.PointsOfInterest
+            .Where(x => x.Location.Distance(location) <= distance)
+            .OrderBy(x => x.Location.Distance(location))
+            .ToListAsync();
     }
 }
