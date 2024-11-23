@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Http.HttpResults;
-using NetTopologySuite.Geometries;
-using System.Xml.Linq;
+﻿using NetTopologySuite.Geometries;
 
 namespace Atlas.Api.Domain;
 
@@ -15,8 +13,27 @@ public class PointOfInterest : Entity
         CreatedAt = DateTime.Now.ToUniversalTime();
     }
 
-    public string Name { get; }
-    public string Description { get; }
+    public string Name { get; private set; }
+    public string Description { get; private set; }
     public Point Location { get; private set; }
     public DateTime CreatedAt { get; private set; }
+    public DateTime? UpdatedAt { get; private set; }
+
+    internal void AssociateLocationData(Point locationData)
+    {
+        UpdatedAt = DateTime.Now.ToUniversalTime();
+        Location = locationData;
+    }
+
+    internal void UpdateDescription(string description)
+    {
+        ArgumentException.ThrowIfNullOrWhiteSpace(description);
+        Description = description;
+    }
+
+    internal void UpdateName(string name)
+    {
+        ArgumentException.ThrowIfNullOrWhiteSpace(name);
+        Name = name;
+    }
 }
