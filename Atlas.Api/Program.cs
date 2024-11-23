@@ -1,5 +1,6 @@
 using Atlas.Api.Api;
 using Atlas.Api.Infrastructure;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http.Json;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
@@ -15,6 +16,8 @@ builder.Services.AddDbContext<AtlasDbContext>(options =>
         o => o.UseNetTopologySuite());
 });
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUnitOfWork,AtlasDbContext>();
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<Program>());
 
 var app = builder.Build();
 using (var scope = app.Services.CreateScope())

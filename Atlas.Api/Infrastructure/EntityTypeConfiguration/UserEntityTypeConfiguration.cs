@@ -14,7 +14,7 @@ public class UserEntityTypeConfiguration : IEntityTypeConfiguration<User>
             .ValueGeneratedOnAdd();
         builder.HasKey(x => x.Id);
 
-        builder.Property(x => x.Guid).ValueGeneratedOnAdd();
+        builder.Property(x => x.Guid).IsRequired();
         builder.HasIndex(x => x.Guid).IsUnique();
         builder.Property(x => x.Username).IsRequired();
         builder.Property(x => x.Location).HasColumnType("geography (point)").IsRequired();

@@ -9,7 +9,7 @@ public class UserRepository(AtlasDbContext dbContext) : IUserRepository
 
     public IUnitOfWork UnitOfWork => _dbContext;
 
-    public async Task Add(User user)
+    public async Task AddAsync(User user)
     {
         await _dbContext.AddAsync(user);
     }
@@ -32,5 +32,10 @@ public class UserRepository(AtlasDbContext dbContext) : IUserRepository
     public void Update(User user)
     {
         _dbContext.Update(user);
+    }
+
+    public async Task<bool> UsernameExistAsync(string username)
+    {
+        return await _dbContext.Users.AnyAsync(x => x.Username == username);
     }
 }

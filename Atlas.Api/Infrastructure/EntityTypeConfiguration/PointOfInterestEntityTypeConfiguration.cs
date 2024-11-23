@@ -14,6 +14,7 @@ public class PointOfInterestEntityTypeConfiguration : IEntityTypeConfiguration<P
             .ValueGeneratedOnAdd();
         builder.HasKey(x => x.Id);
 
+        builder.Property(x => x.Guid).IsRequired();
         builder.Property(x => x.Name).IsRequired();
         builder.Property(x => x.Description).IsRequired();
         builder.Property(x => x.Location).HasColumnType("geography (point)").IsRequired();

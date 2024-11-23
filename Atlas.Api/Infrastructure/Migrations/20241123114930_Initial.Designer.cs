@@ -13,7 +13,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Atlas.Api.Infrastructure.Migrations
 {
     [DbContext(typeof(AtlasDbContext))]
-    [Migration("20241122214352_Initial")]
+    [Migration("20241123114930_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -42,6 +42,9 @@ namespace Atlas.Api.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<Guid>("Guid")
+                        .HasColumnType("uuid");
+
                     b.Property<Point>("Location")
                         .IsRequired()
                         .HasColumnType("geography (point)");
@@ -67,6 +70,9 @@ namespace Atlas.Api.Infrastructure.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<Guid>("Guid")
+                        .HasColumnType("uuid");
+
                     b.Property<Point>("Location")
                         .IsRequired()
                         .HasColumnType("geography (point)");
@@ -79,6 +85,9 @@ namespace Atlas.Api.Infrastructure.Migrations
                         .HasColumnType("text");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Guid")
+                        .IsUnique();
 
                     b.HasIndex("Location");
 

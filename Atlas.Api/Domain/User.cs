@@ -6,6 +6,7 @@ public class User : Entity
 {
     public User(string username, Point location)
     {
+        Guid = Guid.NewGuid();
         ArgumentException.ThrowIfNullOrWhiteSpace(username);
         Username = username;
         AssociateLocationData(location);
@@ -20,5 +21,11 @@ public class User : Entity
     {
         UpdatedAt = DateTime.Now.ToUniversalTime();
         Location = locationData;
+    }
+
+    public void UpdateUsername(string username)
+    {
+        ArgumentException.ThrowIfNullOrWhiteSpace(username);
+        Username = username;
     }
 }

@@ -8,6 +8,7 @@ public class PointOfInterest : Entity
 {
     public PointOfInterest(string name, string description, Point location)
     {
+        Guid = Guid.NewGuid();
         Name = name;
         Description = description;
         Location = location;
