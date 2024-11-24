@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Atlas.Api.Infrastructure;
+using Atlas.Api.Infrastructure.Contracts;
 
 namespace Atlas.UnitTests.Application;
 

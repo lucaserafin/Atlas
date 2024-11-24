@@ -7,8 +7,8 @@ using FluentAssertions;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Atlas.Api.Infrastructure;
 using Atlas.Api.Application.Commands.User;
+using Atlas.Api.Infrastructure.Contracts;
 
 namespace Atlas.UnitTests.Application;
 

@@ -1,5 +1,6 @@
 using Atlas.Api.Domain;
 using Atlas.Api.Infrastructure;
+using Atlas.Api.Infrastructure.Contracts;
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;

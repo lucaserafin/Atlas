@@ -1,4 +1,5 @@
 ﻿using Atlas.Api.Domain;
+using Atlas.Api.Infrastructure.Contracts;
 using Microsoft.EntityFrameworkCore;
 
 namespace Atlas.Api.Infrastructure;

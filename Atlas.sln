@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Atlas.Api", "Atlas.Api\Atla
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Atlas.UnitTests", "Atlas.UnitTests\Atlas.UnitTests.csproj", "{E3F1E3D0-6ABC-45A2-97CC-FF1D5C9B18B6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlas.FunctionalTest", "Atlas.FunctionalTest\Atlas.FunctionalTest.csproj", "{0EC3337C-C7EC-4588-93A6-3D3F0401D97C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{E3F1E3D0-6ABC-45A2-97CC-FF1D5C9B18B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E3F1E3D0-6ABC-45A2-97CC-FF1D5C9B18B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E3F1E3D0-6ABC-45A2-97CC-FF1D5C9B18B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0EC3337C-C7EC-4588-93A6-3D3F0401D97C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0EC3337C-C7EC-4588-93A6-3D3F0401D97C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0EC3337C-C7EC-4588-93A6-3D3F0401D97C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0EC3337C-C7EC-4588-93A6-3D3F0401D97C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

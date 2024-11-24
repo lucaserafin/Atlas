@@ -1,7 +1,7 @@
 ﻿using Atlas.Api.Application.Dto;
 using Atlas.Api.Application.Factories;
 using Atlas.Api.Domain;
-using Atlas.Api.Infrastructure;
+using Atlas.Api.Infrastructure.Contracts;
 using FluentResults;
 using MediatR;
 
@@ -18,18 +18,25 @@ public class CreateUserRequestHandler(IUserRepository userRepository,
     public async Task<Result<UserDto>> Handle(CreateUserRequest request, CancellationToken cancellationToken)
     {
         _logger.LogInformation("Creating user");
-
-        var user = UserFactory.CreateUser(request.Username, request.Coordinate.Latitude, request.Coordinate.Longitude);
-        bool userAlreadyExist = await _userRepository.UsernameExistAsync(user.Username);
-        if (userAlreadyExist)
+        try
         {
-            _logger.LogWarning("Username already exist");
-            return Result.Fail("Username already exist");
-        }
+            var user = UserFactory.CreateUser(request.Username, request.Coordinate.Latitude, request.Coordinate.Longitude);
+            bool userAlreadyExist = await _userRepository.UsernameExistAsync(user.Username);
+            if (userAlreadyExist)
+            {
+                _logger.LogWarning("Username already exist");
+                return Result.Fail("Username already exist");
+            }
 
-        await _userRepository.AddAsync(user);
-        await _userRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-        _logger.LogInformation("User created");
-        return user.ToUserDto();
+            await _userRepository.AddAsync(user);
+            await _userRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
+            _logger.LogInformation("User created");
+            return user.ToUserDto();
+        }
+        catch (Exception ex)
+        {
+            _logger.LogWarning(ex, "Error creating user");
+            return Result.Fail("Error creating user");
+        }
     }
 }

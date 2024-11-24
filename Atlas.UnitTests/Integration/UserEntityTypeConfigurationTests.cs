@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 using NetTopologySuite.Geometries;
 using Atlas.Api.Application.Queries;
 using System.Reflection.Metadata;
+using Atlas.Api.Infrastructure.Contracts;
 
 namespace Atlas.UnitTests.Integration;
 

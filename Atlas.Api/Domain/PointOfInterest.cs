@@ -6,6 +6,7 @@ public class PointOfInterest : Entity
 {
     public PointOfInterest(string name, string description, Point location)
     {
+        ArgumentException.ThrowIfNullOrWhiteSpace(name);
         Guid = Guid.NewGuid();
         Name = name;
         Description = description;

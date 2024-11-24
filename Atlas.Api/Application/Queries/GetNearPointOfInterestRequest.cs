@@ -1,5 +1,5 @@
 ﻿using Atlas.Api.Application.Dto;
-using Atlas.Api.Infrastructure;
+using Atlas.Api.Infrastructure.Contracts;
 using FluentResults;
 using MediatR;
 using NetTopologySuite.Geometries;

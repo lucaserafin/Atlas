@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Storage;
 
-namespace Atlas.Api.Infrastructure;
+namespace Atlas.Api.Infrastructure.Contracts;
 
 public interface IUnitOfWork
 {

@@ -1,6 +1,6 @@
 ﻿using Atlas.Api.Domain;
 
-namespace Atlas.Api.Infrastructure;
+namespace Atlas.Api.Infrastructure.Contracts;
 
 public interface IUserRepository
 {

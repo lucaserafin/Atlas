@@ -1,7 +1,7 @@
 ﻿using Atlas.Api.Domain;
 using NetTopologySuite.Geometries;
 
-namespace Atlas.Api.Infrastructure;
+namespace Atlas.Api.Infrastructure.Contracts;
 
 public interface IPointOfInterestRepository
 {
@@ -11,6 +11,6 @@ public interface IPointOfInterestRepository
     Task<IEnumerable<PointOfInterest>> GetAllAsync();
     void Update(PointOfInterest poi);
     void Remove(PointOfInterest poi);
-    Task<bool> PointOfInterestNameExistAsync(string poi);
+    Task<bool> PointOfInterestNameExistAsync(string name);
     Task<IEnumerable<PointOfInterest>> GetNearPointOfInterestAsync(Point location, double distance);
 }

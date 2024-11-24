@@ -1,7 +1,7 @@
 using Atlas.Api.Application.Commands.Poi;
 using Atlas.Api.Application.Dto;
 using Atlas.Api.Domain;
-using Atlas.Api.Infrastructure;
+using Atlas.Api.Infrastructure.Contracts;
 using FluentAssertions;
 using Microsoft.Extensions.Logging;
 using NSubstitute;
