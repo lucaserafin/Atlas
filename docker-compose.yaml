@@ -1,4 +1,14 @@
 services:
+  atlas:
+    image: lucaserafin/atlas:latest
+    build:
+      context: .
+      dockerfile: Atlas.Api/Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      ConnectionStrings__AtlasDb: "Host=database;Port=5432;Database=test_gis;Username=postgres;Password=postgres"
+
   database:
     image: postgis/postgis:17-3.5
     ports:
