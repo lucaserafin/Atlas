@@ -210,4 +210,71 @@ public class UserApiTests : BaseIntegrationTest
         pointsOfInterest.Should().NotBeNull();
         pointsOfInterest.Should().NotBeEmpty();
     }
+
+    [Fact]
+    public async Task Should_get_users_in_radius_area()
+    {
+        // Arrange
+        var client = _factory.CreateClient();
+
+        // Act
+        var responseUsers = await client.GetFromJsonAsync<IEnumerable<UserDto>>("/api/users/userinradius?latitude=1&longitude=1&distance=10000");
+
+        // Assert
+        responseUsers.Should().NotBeNullOrEmpty();
+    }
+
+
+    [Fact]
+    public async Task Should_get_users_in_region_area()
+    {
+        // Arrange
+        var client = _factory.CreateClient();
+        var user = new CreateUserRequest
+        (
+            Username: "TestUserAt0",
+            Coordinate: new CoordinateDto(Latitude: 0, Longitude: 0)
+        );
+
+        await client.PostAsJsonAsync("/api/users", user);
+
+        // Act
+        var responseUsers = await client.GetFromJsonAsync<IEnumerable<UserDto>>("/api/users/usersinregion?Latitude0=0&Longitude0=0&Latitude1=0&Longitude1=1&Latitude2=1&Longitude2=1&Latitude3=1&Longitude3=0&Latitude4=0&Longitude4=0");
+
+        // Assert
+        responseUsers.Should().NotBeNullOrEmpty();
+    }
+
+    [Fact]
+    public async Task Should_get_distance_between_user_and_poi()
+    {
+        // Arrange
+        var client = _factory.CreateClient();
+        var user = new CreateUserRequest
+        (
+            Username: "TestUserAt1",
+            Coordinate: new CoordinateDto(Latitude: 1, Longitude: 1)
+        );
+
+        var userResponse = await client.PostAsJsonAsync("/api/users", user);
+        userResponse.EnsureSuccessStatusCode();
+        var userDto = await client.GetFromJsonAsync<UserDto>(userResponse.Headers.Location.ToString());
+
+        // Arrange2
+        var pointOfInterest = new CreatePointOfInterestRequest
+        (
+            Name: "TestPOIat0",
+            Description: "Test POI Description",
+            Coordinate: new CoordinateDto(Latitude: 0, Longitude: 0)
+        );
+        var responsePoi = await client.PostAsJsonAsync("/api/pointofinterests", pointOfInterest);
+        responsePoi.EnsureSuccessStatusCode();
+        var poiDto = await client.GetFromJsonAsync<PointOfInterestDto>(responsePoi.Headers.Location.ToString());
+
+        // Act
+        var responsedistance = await client.GetFromJsonAsync<double>($"/api/users/{userDto.Guid}/distance/pointofinterest/{poiDto.Guid}");
+
+        // Assert
+        responsedistance.Should().BeApproximately(157,1);
+    }
 }

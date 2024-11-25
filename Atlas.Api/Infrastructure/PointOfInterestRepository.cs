@@ -44,8 +44,9 @@ public class PointOfInterestRepository(AtlasDbContext dbContext) : IPointOfInter
     public async Task<IEnumerable<PointOfInterest>> GetNearPointOfInterestAsync(Point location, double distance)
     {
        return await _dbContext.PointsOfInterest
-            .Where(x => x.Location.Distance(location) <= distance)
+            .Where(x => x.Location.IsWithinDistance(location, distance))
             .OrderBy(x => x.Location.Distance(location))
+            .AsNoTracking()
             .ToListAsync();
     }
 }

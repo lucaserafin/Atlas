@@ -9,6 +9,11 @@ public static class PointFactory
     {
         const int srid = 4326;
         var gf = NtsGeometryServices.Instance.CreateGeometryFactory(srid);
-        return gf.CreatePoint(new Coordinate(longitude, latitude));
+        return gf.CreatePoint(CreateCoordinate(latitude, longitude));
+    }
+
+    public static Coordinate CreateCoordinate(double latitude, double longitude)
+    {
+        return new Coordinate(longitude, latitude);
     }
 }
